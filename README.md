@@ -67,34 +67,32 @@ source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
 3. Install the dependencies:
 
-bash
+   ```bash
 
-pip install -r requirements.txt
+   pip install -r requirements.txt
 
 4. Set up your .env file with the necessary environment variables:
 
-plaintext
-
-SECRET_KEY=your_secret_key
-DATABASE_URL=your_database_url
-EDAMAM_API_KEY=your_edamam_api_key
-SPOONACULAR_API_KEY=your_spoonacular_api_key
+   SECRET_KEY=your_secret_key
+   DATABASE_URL=your_database_url
+   EDAMAM_API_KEY=your_edamam_api_key
+   SPOONACULAR_API_KEY=your_spoonacular_api_key
 
 5. Initialize the database:
 
-bash
+    ```bash
 
-    flask db init
-    flask db migrate -m "Initial migration."
-    flask db upgrade
+    ```flask db init
+    ```flask db migrate -m "Initial migration."
+    ```flask db upgrade
 
 ## Running the Application
 
 1. Start the Flask development server:
 
-    bash
+    ```bash
 
-python run.py
+    ```python run.py
 
 2. Open your browser and navigate to http://127.0.0.1:5000 to use the application.
 
@@ -102,41 +100,40 @@ python run.py
 
 1. Install the Vercel CLI:
 
-    bash
+    ```bash
 
-npm install -g vercel
+    ```npm install -g vercel
 
 2. Log in to Vercel:
 
-bash
+    ```bash
 
-vercel login
+    ```vercel login
 
 3. Create a vercel.json configuration file in your project root:
 
-json
-
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "run.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/run.py"
-    }
-  ]
-}
+   ```json
+   {
+     "version": 2,
+     "builds": [
+       {
+         "src": "run.py",
+         "use": "@vercel/python"
+       }
+     ],
+     "routes": [
+       {
+         "src": "/(.*)",
+         "dest": "/run.py"
+       }
+     ]
+   }
 
 4. Deploy the application:
 
-bash
+   ```bash
 
-vercel
+   ```vercel
 
 5. Follow the prompts to complete the deployment. Once deployed, Vercel will provide you with a URL where you can access your application.
 
@@ -149,12 +146,12 @@ vercel
 
 Contributions are welcome! Please follow these steps:
 
-    Fork the repository.
-    Create a new branch (git checkout -b feature-branch).
-    Make your changes.
-    Commit your changes (git commit -am 'Add new feature').
-    Push to the branch (git push origin feature-branch).
-    Create a new Pull Request.
+    1. Fork the repository.
+    2. Create a new branch (git checkout -b feature-branch).
+    3. Make your changes.
+    4. Commit your changes (git commit -am 'Add new feature').
+    5. Push to the branch (git push origin feature-branch).
+    6. Create a new Pull Request.
 
 # License
 
