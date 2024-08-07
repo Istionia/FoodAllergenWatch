@@ -158,7 +158,7 @@ Contributions are welcome! Please follow these steps:
 
 # License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the [Cooperative Non-Violent Public License v4](https://scancode-licensedb.aboutcode.org/cooperative-non-violent-4.0.html). See the LICENSE file for details.
 
 # Acknowledgements
 
