@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Recipe Allergen Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodAllergenWatch</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Recipe Allergen Search</h1>
-    <form id="search-form">
-        <input type="text" id="dish" placeholder="Enter dish name">
-        <input type="text" id="country" placeholder="Enter country">
-        <button type="submit">Search</button>
-    </form>
-    <div id="results"></div>
-
-    <script>
-        document.getElementById('search-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const dish = document.getElementById('dish').value;
-            const country = document.getElementById('country').value;
-            
-            fetch(`/allergens?dish=${dish}&country=${country}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('results').innerHTML = JSON.stringify(data);
-                });
-        });
-    </script>
+    <header>
+        <h1>FoodAllergenWatch</h1>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </nav>
+    <div class="content">
+        <h2>Welcome to FoodAllergenWatch!</h2>
+        <p>Your resource for food allergen information.</p>
+        <form id="allergenForm">
+            <label for="allergenInput">Enter Allergen:</label>
+            <input type="text" id="allergenInput" name="allergen">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>
+
