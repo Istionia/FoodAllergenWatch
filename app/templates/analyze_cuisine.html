@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allergen Distribution by Cuisine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Allergen Distribution for {{ country }}</h1>
+    </header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </nav>
+    <div class="content">
+        {% if distribution %}
+            <h2>Allergen Distribution</h2>
+            <ul>
+                {% for allergen, count in distribution.items() %}
+                    <li>{{ allergen }}: {{ count }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No allergen data available for this cuisine.</p>
+        {% endif %}
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
