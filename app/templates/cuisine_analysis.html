@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'https://fonts.googleapis.com' 'unsafe-inline';">
     <title>Cuisine Analysis</title>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Allergen Analysis for {{ country | capitalize }}</h1>
+    <header>
+        <h1>Allergen Analysis for {{ country | capitalize }}</h1>
+    </header>
     <ul>
         {% for allergen, count in allergen_distribution.items() %}
             <li>{{ allergen | capitalize }}: {{ count }} recipes contain this allergen</li>
