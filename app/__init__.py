@@ -4,7 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import Config
-from models import User, Item
+from .models import User, Item
 
 db = SQLAlchemy()
 migrate = Migrate()

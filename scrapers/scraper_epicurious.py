@@ -1,3 +1,23 @@
+"""
+scraper_epicurious.py
+
+This module provides functionality to scrape recipes from the Epicurious website based on the specified country cuisine.
+It uses the BeautifulSoup library to parse HTML content and the requests library to handle HTTP requests.
+
+Functions:
+    scrape_epicurious_recipes_by_country(country): Scrapes recipes from Epicurious based on the specified country cuisine.
+
+Usage Example:
+    if __name__ == "__main__":
+        country = 'french'
+        recipes = scrape_epicurious_recipes_by_country(country)
+        for recipe in recipes:
+            print(recipe['title'])
+            print(recipe['ingredients'])
+            print(recipe['link'])
+            print("---")
+"""
+
 import requests
 from bs4 import BeautifulSoup
 import logging
@@ -63,6 +83,7 @@ def scrape_epicurious_recipes_by_country(country):
 
     return recipes
 
+# Example usage
 if __name__ == "__main__":
     country = 'malaysian'
     recipes = scrape_epicurious_recipes_by_country(country)

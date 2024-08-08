@@ -1,3 +1,26 @@
+"""
+scraper_allrecipes.py
+
+This module provides functionality to scrape recipes from AllRecipes by country.
+It fetches the HTML content of the AllRecipes pages, parses the recipe information,
+and extracts details such as the recipe title, ingredients, and link to the detailed recipe page.
+
+Functions:
+    get_country_url(country): Get the URL suffix for a given country.
+    fetch_page_content(url): Fetch the HTML content of a given URL.
+    parse_recipes(soup): Parse the HTML soup to extract recipe information.
+    fetch_ingredients(link): Fetch the ingredients from a detailed recipe page.
+    scrape_allrecipes_recipes_by_country(country): Scrape recipes from AllRecipes by country.
+
+Example usage:
+    recipes = scrape_allrecipes_recipes_by_country('italy')
+    for recipe in recipes:
+        print(recipe['title'])
+        print(recipe['ingredients'])
+        print(recipe['link'])
+        print("---")
+"""
+
 import requests
 from bs4 import BeautifulSoup
 

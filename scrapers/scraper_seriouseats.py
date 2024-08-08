@@ -1,3 +1,23 @@
+"""
+scraper_seriouseats.py
+
+This module contains a function to scrape recipes from the Serious Eats website based on a specified country.
+It retrieves the recipe titles, ingredients, and links to the detailed recipe pages.
+
+Dependencies:
+    - requests
+    - BeautifulSoup (from bs4)
+    - time
+    - logging
+
+Usage Example:
+    from scraper_seriouseats import scrape_serious_eats_recipes_by_country
+
+    recipes = scrape_serious_eats_recipes_by_country('Italy')
+    for recipe in recipes:
+        print(recipe['title'], recipe['link'])
+"""
+
 import requests
 from bs4 import BeautifulSoup
 import time
@@ -70,3 +90,4 @@ def scrape_serious_eats_recipes_by_country(country):
             continue
 
     return recipes
+
