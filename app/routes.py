@@ -6,6 +6,7 @@ from . import app
 from data.fetch_edamam import fetch_edamam_recipes
 from data.fetch_ninjas import fetch_ninjas_recipes
 from .utils import check_for_allergens
+from .utils import analyze_country_cuisine
 
 main = Blueprint('main', __name__)
 
@@ -57,6 +58,12 @@ def allergen_check():
     # Render the allergen check results in the template
     return render_template('allergen_check.html', percentage=percentage, query=query, country=country)
 
+@main.route('/cuisine_analysis', methods=['GET'])
+def cuisine_analysis():
+    country = request.args.get('country', 'italy')
+    allergen_distribution = analyze_country_cuisine(country)
+    
+    return render_template('cuisine_analysis.html', country=country, allergen_distribution=allergen_distribution)
 
 # Register the Blueprint
 app.register_blueprint(main)

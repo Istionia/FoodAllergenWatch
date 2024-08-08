@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cuisine Analysis</title>
+</head>
+<body>
+    <h1>Allergen Analysis for {{ country | capitalize }}</h1>
+    <ul>
+        {% for allergen, count in allergen_distribution.items() %}
+            <li>{{ allergen | capitalize }}: {{ count }} recipes contain this allergen</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

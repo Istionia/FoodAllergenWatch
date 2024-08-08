@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def scrape_serious_eats_by_country(country):
+def scrape_serious_eats_recipes_by_country(country):
     # Base URL for searching recipes on Serious Eats
     base_url = "https://www.seriouseats.com/search"
     
