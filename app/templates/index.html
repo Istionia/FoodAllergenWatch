@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,16 +13,18 @@
     </header>
     <nav>
         <a href="/">Home</a>
+        <a href="/recipes?q=">Search Recipes</a>
+        <a href="/allergen_check?q=">Allergen Check</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
     </nav>
     <div class="content">
         <h2>Welcome to FoodAllergenWatch!</h2>
         <p>Your resource for food allergen information.</p>
-        <form id="allergenForm">
-            <label for="allergenInput">Enter Allergen:</label>
-            <input type="text" id="allergenInput" name="allergen">
-            <button type="submit">Submit</button>
+        <form id="allergenForm" action="/allergen_check" method="GET">
+            <label for="allergenInput">Enter Dish Name:</label>
+            <input type="text" id="allergenInput" name="q" required>
+            <button type="submit">Check Allergens</button>
         </form>
     </div>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>

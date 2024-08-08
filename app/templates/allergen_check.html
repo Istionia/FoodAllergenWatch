@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Allergen Check</title>
+</head>
+<body>
+    <h1>Allergen Check</h1>
+    <form method="get" action="/allergen_check">
+        <label for="q">Dish Name:</label>
+        <input type="text" id="q" name="q" value="{{ query }}" required>
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" value="{{ country }}">
+
+        <button type="submit">Check</button>
+    </form>
+
+    {% if percentage is not none %}
+        <p>{{ percentage }}% of recipes for "{{ query }}" contain one or more of the big 9 allergens{% if country %} in {{ country }}{% endif %}.</p>
+    {% else %}
+        <p>No recipes found for "{{ query }}"{% if country %} in {{ country }}{% endif %}.</p>
+    {% endif %}
+</body>
+</html>

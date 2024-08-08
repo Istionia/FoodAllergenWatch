@@ -28,11 +28,11 @@ FoodAllergenWatch/
 │ ├── init.py
 │ ├── scraper_allrecipes.py
 │ ├── scraper_epicurious.py
-│ ├── scraper_yummly.py
+│ ├── scraper_seriouseats.py
 ├── data/
 │ ├── init.py
 │ ├── fetch_edamam.py
-│ ├── fetch_spoonacular.py
+│ ├── fetch_tasty.py
 ├── migrations/
 ├── venv/
 ├── config.py
