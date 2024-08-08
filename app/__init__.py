@@ -1,19 +1,13 @@
-# app/__init__.py
-
+# __init__.py
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from .extensions import db, migrate
 from config import Config
-from .models import User, Item
-
-db = SQLAlchemy()
-migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
     
     # Load configuration
-    app.config.from_object('config.Config')
+    app.config.from_object(Config)
     
     # Initialize extensions
     db.init_app(app)

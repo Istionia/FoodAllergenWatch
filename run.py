@@ -1,5 +1,8 @@
-from app import app, db
+from app import create_app
+app = create_app()
+
 from flask_migrate import Migrate
+from app.models import db
 
 # Initialize database migration support
 migrate = Migrate(app, db)
