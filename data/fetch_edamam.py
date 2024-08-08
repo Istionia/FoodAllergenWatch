@@ -7,6 +7,11 @@ def fetch_edamam_recipes(query, country=None):
     app_id = os.getenv('EDAMAM_APP_ID')
     # Access API key
     api_key = os.getenv('EDAMAM_API_KEY')
+
+    # Check if environment variables are set
+    if not app_id or not api_key:
+        raise ValueError("EDAMAM_APP_ID and EDAMAM_API_KEY must be set as environment variables")
+
     # Access point
     url = ' https://api.edamam.com/api/recipes/v2'
     params = {
@@ -17,11 +22,10 @@ def fetch_edamam_recipes(query, country=None):
         "cuisineType": country if country else "any",
     }
 
-    response = requests.get(url, params=params)
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()  # Raise an HTTPError for bad responses (4xx and 5xx)
 
-    # If request was successful...
-    if response.status.code == 200:
-        # ...Convert to JSON
         data = response.json()
         recipes = []
         for hit in data['hits']:
@@ -33,10 +37,11 @@ def fetch_edamam_recipes(query, country=None):
                 'image': recipe['image'],
                 'ingredientLines': recipe['ingredientLines'],
             })
+            
+            return recipes
         
-        return recipes
-    else:
-        print(f"Failed to fetch recipes: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to fetch recipes: {e}")
         return None
 
 
