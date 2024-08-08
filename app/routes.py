@@ -3,18 +3,28 @@
 from flask import Blueprint, render_template, request
 from . import app
 # Import the function for fetching the Edamam API
-from data.fetch_edamam import fetch_recipes
+from data.fetch_edamam import fetch_edamam_recipes
+from data.fetch_ninjas import fetch_ninjas_recipes
 from .utils import check_for_allergens
 
 main = Blueprint('main', __name__)
 
-@main.route('/recipes', methods=['GET'])
-def recipes():
+@main.route('/edamam_recipes', methods=['GET'])
+def edamam_recipes():
     # Get the search query from the URL
     query = request.args.get('query', 'chicken') # Default to 'chicken' if no query is provided
     # Fetch the recipes from the API 
-    recipes = fetch_recipes(query)
+    recipes = fetch_edamam_recipes(query)
     # Render the data using a template  
+    return render_template('recipes.html', recipes=recipes)
+
+@main.route('/ninjas_recipes', methods=['GET'])
+def ninjas_recipes():
+    # Get the search query from the URL
+    query = request.args.get('query', 'chicken')
+    # Fetch the recipes from the API 
+    recipes = fetch_ninjas_recipes(query)
+    # Render the data using a template
     return render_template('recipes.html', recipes=recipes)
 
 @main.route('/allergen-check', methods=['GET'])
@@ -28,7 +38,7 @@ def allergen_check():
         return render_template('allergen_check.html', percentage=None, query="", country=country)
 
     # Fetch recipes based on the query and country
-    recipes = fetch_recipes(query, country)
+    recipes = fetch_edamam_recipes(query, country), fetch_ninjas_recipes(query)
     
     # Count the total number of recipes fetched
     total_recipes = len(recipes)

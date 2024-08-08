@@ -9,12 +9,12 @@
     <ul>
         {% for recipe in recipes %}
             <li>
-                <h2>{{ recipe['label'] }}</h2>
-                <img src="{{ recipe['image'] }}" alt="{{ recipe['label'] }}">
-                <p>{{ recipe['source'] }}</p>
-                <a href="{{ recipe['url'] }}">View Recipe</a>
+                <h2>{{ recipe['name'] }}</h2>
+                <p><strong>Ingredients:</strong> {{ recipe['ingredients'] }}</p>
+                <p><strong>Instructions:</strong> {{ recipe['instructions'] }}</p>
             </li>
         {% endfor %}
     </ul>
 </body>
 </html>
+

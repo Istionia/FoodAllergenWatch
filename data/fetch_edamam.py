@@ -2,7 +2,7 @@ import os
 # use this to make GET requests
 import requests
 
-def fetch_recipes(query, country=None):
+def fetch_edamam_recipes(query, country=None):
     # Access app ID
     app_id = os.getenv('EDAMAM_APP_ID')
     # Access API key
@@ -23,20 +23,20 @@ def fetch_recipes(query, country=None):
     if response.status.code == 200:
         # ...Convert to JSON
         data = response.json()
+        recipes = []
+        for hit in data['hits']:
+            recipe = hit['recipe']
+            recipes.append({
+                'label': recipe['label'],
+                'source': recipe['source'],
+                'url': recipe['url'],
+                'image': recipe['image'],
+                'ingredientLines': recipe['ingredientLines'],
+            })
+        
+        return recipes
     else:
+        print(f"Failed to fetch recipes: {response.status_code}")
         return None
-    
-    recipes = []
-    for hit in data['hits']:
-        recipe = hit['recipe']
-        recipes.append({
-            'label': recipe['label'],
-            'source': recipe['source'],
-            'url': recipe['url'],
-            'image': recipe['image'],
-            'ingredientLines': recipe['ingredientLines'],
-        })
-    
-    return recipes
 
 
