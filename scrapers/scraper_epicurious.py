@@ -1,57 +1,73 @@
 import requests
 from bs4 import BeautifulSoup
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def scrape_epicurious_recipes_by_country(country):
-    # Base URL for searching recipes on Epicurious
+    """
+    Scrape recipes from Epicurious based on the specified country cuisine.
+
+    Args:
+        country (str): The name of the country cuisine to search for.
+
+    Returns:
+        list: A list of dictionaries containing recipe information.
+    """
     base_url = "https://www.epicurious.com/search"
-    
-    # Set up the query parameters
     params = {
         'content': 'recipe',
-        'cuisine': country.lower()  # Convert country name to lowercase
+        'cuisine': country.lower()
     }
-    
-    # Make the request to Epicurious
-    response = requests.get(base_url, params=params)
-    if response.status_code != 200:
-        print(f"Failed to retrieve data for {country}")
+
+    try:
+        response = requests.get(base_url, params=params)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        logger.error(f"Failed to retrieve data for {country}: {e}")
         return []
-    
-    # Parse the HTML content
+
     soup = BeautifulSoup(response.text, 'html.parser')
-    
-    # Find recipe cards in the search results
     recipe_elements = soup.find_all('article', class_='recipe-content-card')
 
-    # List to store the extracted recipe information
     recipes = []
-    
     for recipe in recipe_elements:
-        title = recipe.find('h4', class_='hed').text.strip()
-        link = "https://www.epicurious.com" + recipe.find('a')['href']
-        
-        # Fetch the detailed recipe page for ingredients
-        recipe_response = requests.get(link)
-        if recipe_response.status_code == 200:
+        title_element = recipe.find('h4', class_='hed')
+        link_element = recipe.find('a')
+
+        if not title_element or not link_element:
+            continue
+
+        title = title_element.text.strip()
+        link = "https://www.epicurious.com" + link_element['href']
+
+        try:
+            recipe_response = requests.get(link)
+            recipe_response.raise_for_status()
+        except requests.RequestException as e:
+            logger.error(f"Failed to retrieve recipe details from {link}: {e}")
+            ingredients_list = []
+        else:
             recipe_soup = BeautifulSoup(recipe_response.text, 'html.parser')
             ingredients = recipe_soup.find_all('li', class_='ingredient')
             ingredients_list = [ingredient.text.strip() for ingredient in ingredients]
-        else:
-            ingredients_list = []
-        
-        # Append the scraped data to the list
+
         recipes.append({
             'title': title,
             'ingredients': ingredients_list,
             'country': country,
             'link': link
         })
-    
+
     return recipes
 
-recipes = scrape_epicurious_recipes_by_country('french')
-for recipe in recipes:
-    print(recipe['title'])
-    print(recipe['ingredients'])
-    print(recipe['link'])
-    print("---")
+if __name__ == "__main__":
+    country = 'malaysian'
+    recipes = scrape_epicurious_recipes_by_country(country)
+    for recipe in recipes:
+        print(recipe['title'])
+        print(recipe['ingredients'])
+        print(recipe['link'])
+        print("---")

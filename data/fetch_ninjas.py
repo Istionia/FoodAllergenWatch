@@ -1,3 +1,18 @@
+"""
+fetch_ninjas.py
+
+This module provides functionality to fetch recipes from the API Ninjas recipe endpoint.
+It includes error handling, logging, and response validation to ensure robust and reliable
+interaction with the API.
+
+Environment Variables:
+    NINJAS_API_KEY (str): The API key for authenticating requests to the API Ninjas service.
+
+Functions:
+    fetch_ninjas_recipes(query: str) -> Optional[List[Dict[str, str]]]:
+        Fetches recipes based on the provided query string.
+"""
+
 import os
 import requests
 import logging
@@ -6,11 +21,12 @@ from typing import List, Dict, Optional
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
+# Retrieve the API key from environment variables
 api_key = os.getenv('NINJAS_API_KEY')
-
 if not api_key:
     raise ValueError("API key not found. Please set the NINJAS_API_KEY environment variable.")
 
+# API endpoint URL
 url = "https://api.api-ninjas.com/v1/recipe"
 
 def fetch_ninjas_recipes(query):
