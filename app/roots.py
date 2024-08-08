@@ -1,5 +1,8 @@
 from flask import Blueprint, render_template, request
+from . import app
 from .utils import analyze_country_cuisine
+
+main = Blueprint('main', __name__)
 
 @main.route('/analyze_cuisine', methods=['GET'])
 def analyze_cuisine():
