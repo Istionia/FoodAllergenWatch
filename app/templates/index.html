@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Allergen Search</title>
+</head>
+<body>
+    <h1>Recipe Allergen Search</h1>
+    <form id="search-form">
+        <input type="text" id="dish" placeholder="Enter dish name">
+        <input type="text" id="country" placeholder="Enter country">
+        <button type="submit">Search</button>
+    </form>
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const dish = document.getElementById('dish').value;
+            const country = document.getElementById('country').value;
+            
+            fetch(`/allergens?dish=${dish}&country=${country}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('results').innerHTML = JSON.stringify(data);
+                });
+        });
+    </script>
+</body>
+</html>
