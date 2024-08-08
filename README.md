@@ -39,6 +39,7 @@ FoodAllergenWatch/
 ├── run.py
 ├── requirements.txt
 ├── .env
+└── LICENSE.md
 └── README.md
 
 
@@ -160,4 +161,5 @@ This project is licensed under the [Cooperative Non-Violent Public License v4](h
 # Acknowledgements
 
     Thanks to the providers of the recipe data and APIs used in this project.
+    Thanks, as well, to Aayush (a.k.a. [Divide-By-0](https://github.com/Divide-By-0/)) for the [project idea.](https://aayushg.com/ideas)
     Inspired by the need for better food allergen awareness.
