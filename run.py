@@ -1,6 +1,15 @@
-from app import create_app
+from app import app, db
+from flask_migrate import Migrate
 
-app = create_app()
+# Initialize database migration support
+migrate = Migrate(app, db)
 
-if __name__ == "__main__":
+# Import Blueprints (if using any)
+from app.routes import main
+
+# Register Blueprints
+app.register_blueprint(main)
+
+if __name__ == '__main__':
+    # Running the Flask app
     app.run(debug=True)
