@@ -1,8 +1,6 @@
 # models.py
 from .extensions import db
 
-TERMINAL
-
 class Item(db.Model):
     """
     Item model representing an item in the system.
